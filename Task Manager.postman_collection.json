@@ -1,0 +1,1090 @@
+{
+	"info": {
+		"_postman_id": "3b9a98e7-6f25-41ac-80b0-1ecee8860d88",
+		"name": "Task Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23038556"
+	},
+	"item": [
+		{
+			"name": "Create a task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" : \"TASK\",\r\n    \"description\" : \"DESCRIPTION OF TASK\",\r\n    \"dueDate\" : \"2024-02-28\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/tasks/create"
+			},
+			"response": [
+				{
+					"name": "Create a task-Un authorized",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/tasks/create"
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-BYjSxSY5s9oOjfZrzilKXcK8MhU\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 25 Jan 2024 23:03:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Unauthorized: Invalid token\"\n}"
+				},
+				{
+					"name": "Create a task-missing-body value",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/tasks/create"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-MRrPyn0/nR7KTKUDAJ6pqDTw1jM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 25 Jan 2024 23:03:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Title, description, and due date are required.\"\n}"
+				},
+				{
+					"name": "Create a task-success-task-created",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"TASK\",\r\n    \"description\" : \"DESCRIPTION OF TASK\",\r\n    \"dueDate\" : \"2024-02-28\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/tasks/create"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "318"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13e-d60E3g4qz3sGygDYKPKSjTycXEs\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 25 Jan 2024 23:07:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Task created successfully\",\n    \"data\": {\n        \"title\": \"TASK\",\n        \"description\": \"DESCRIPTION OF TASK\",\n        \"dueDate\": \"2023-12-31T20:31:00.000Z\",\n        \"priority\": -25,\n        \"status\": \"TODO\",\n        \"deleted_at\": null,\n        \"_id\": \"65b2e9a5fbd62c7c333a4684\",\n        \"createdAt\": \"2024-01-25T23:07:17.032Z\",\n        \"updatedAt\": \"2024-01-25T23:07:17.032Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a sub task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"task_id\": \"65b2e9a5fbd62c7c333a4684\",\r\n    \"title\": \"sub-task-3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/subtasks/create-subtask"
+			},
+			"response": [
+				{
+					"name": "empty body",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/subtasks/create-subtask"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-q9ChqmjNKqPyD9pmSemxzGsbjYc\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 25 Jan 2024 23:25:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Task ID and title are required for creating a subtask\"\n}"
+				},
+				{
+					"name": "created-success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task_id\": \"65b2e9a5fbd62c7c333a4684\",\r\n    \"title\": \"sub-task\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/subtasks/create-subtask"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "269"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10d-s1KQfsDyvPyq+3yTOUQcCnesWKs\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 25 Jan 2024 23:27:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Subtask created successfully\",\n    \"data\": {\n        \"task_id\": \"65b2e9a5fbd62c7c333a4684\",\n        \"title\": \"sub-task\",\n        \"status\": 0,\n        \"deleted_at\": null,\n        \"_id\": \"65b2ee52d595b5772ed55e2a\",\n        \"createdAt\": \"2024-01-25T23:27:14.851Z\",\n        \"updatedAt\": \"2024-01-25T23:27:14.851Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getAllUserTasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/tasks/?dueDate=2024-02-28",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						""
+					],
+					"query": [
+						{
+							"key": "dueDate",
+							"value": "2024-02-28"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getAllUserTasks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/tasks/"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "656"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"290-oWYltA5QYP3KmaJo7W1wQUzv3eE\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 25 Jan 2024 23:36:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"User tasks retrieved successfully\",\n    \"data\": {\n        \"tasks\": [\n            {\n                \"_id\": \"65b2e9a5fbd62c7c333a4684\",\n                \"title\": \"TASK\",\n                \"description\": \"DESCRIPTION OF TASK\",\n                \"dueDate\": \"2023-12-31T20:31:00.000Z\",\n                \"priority\": -25,\n                \"status\": \"TODO\",\n                \"deleted_at\": null,\n                \"createdAt\": \"2024-01-25T23:07:17.032Z\",\n                \"updatedAt\": \"2024-01-25T23:07:17.032Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"65b2f07b4bd9143282f14aa7\",\n                \"title\": \"TASK\",\n                \"description\": \"DESCRIPTION OF TASK\",\n                \"dueDate\": \"2024-02-28T00:00:00.000Z\",\n                \"priority\": 34,\n                \"status\": \"TODO\",\n                \"deleted_at\": null,\n                \"createdAt\": \"2024-01-25T23:36:27.166Z\",\n                \"updatedAt\": \"2024-01-25T23:36:27.166Z\",\n                \"__v\": 0\n            }\n        ],\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"totalItems\": 2,\n        \"isNext\": false\n    }\n}"
+				},
+				{
+					"name": "getAllUserTasks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/?dueDate=2024-02-28&priority=34",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "dueDate",
+									"value": "2024-02-28"
+								},
+								{
+									"key": "priority",
+									"value": "34"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "666"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29a-iHbDei18VrRDbh1dyFAqeIIrK8E\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 05:07:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"User tasks retrieved successfully\",\n    \"data\": {\n        \"tasks\": [\n            {\n                \"_id\": \"65b2f07b4bd9143282f14aa7\",\n                \"title\": \"TASK\",\n                \"description\": \"DESCRIPTION OF TASK\",\n                \"dueDate\": \"2024-02-28T00:00:00.000Z\",\n                \"priority\": 34,\n                \"status\": \"TODO\",\n                \"deleted_at\": null,\n                \"createdAt\": \"2024-01-25T23:36:27.166Z\",\n                \"updatedAt\": \"2024-01-25T23:36:27.166Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"65b3363817be3774f257f3fb\",\n                \"title\": \"TASK-2\",\n                \"description\": \"DESCRIPTION OF TASK-2\",\n                \"dueDate\": \"2024-02-28T00:00:00.000Z\",\n                \"priority\": 32,\n                \"status\": \"IN_PROGRESS\",\n                \"deleted_at\": null,\n                \"createdAt\": \"2024-01-26T04:34:00.876Z\",\n                \"updatedAt\": \"2024-01-26T05:04:22.604Z\",\n                \"__v\": 0\n            }\n        ],\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"totalItems\": 2,\n        \"isNext\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phone_number\" : \"+917782865144\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/user/add"
+			},
+			"response": [
+				{
+					"name": "add users",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/add"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-EVL8ZZJYaySvCkEzUBM95/ZlOPo\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 02:54:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Phone number is required and priority required\"\n}"
+				},
+				{
+					"name": "with priority",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\" : \"+918603204527\",\r\n    \"priority\": 1\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/add"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "223"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"df-Ax3l6D7XFhiB7tBZ8xgoCSCq0SA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 03:42:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"User added successfully\",\n    \"data\": {\n        \"phone_number\": \"+918603204527\",\n        \"priority\": 1,\n        \"_id\": \"65b32a2a27886005d1f5434c\",\n        \"createdAt\": \"2024-01-26T03:42:34.656Z\",\n        \"updatedAt\": \"2024-01-26T03:42:34.656Z\",\n        \"__v\": 0\n    }\n}"
+				},
+				{
+					"name": "without priority",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\" : \"+917782865144\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/add"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "223"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"df-mmN8ePy0bJ2xNyYefJXCtSxP3KI\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 03:43:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"User added successfully\",\n    \"data\": {\n        \"phone_number\": \"+917782865144\",\n        \"priority\": 0,\n        \"_id\": \"65b32a4d27886005d1f5434e\",\n        \"createdAt\": \"2024-01-26T03:43:09.922Z\",\n        \"updatedAt\": \"2024-01-26T03:43:09.922Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get subtask by querry",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/subtasks/?task_id=65b2e9a5fbd62c7c333a4684",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"subtasks",
+						""
+					],
+					"query": [
+						{
+							"key": "task_id",
+							"value": "65b2e9a5fbd62c7c333a4684"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get subtask by querry",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/subtasks/?task_id=65b2e9a5fbd62c7c333a4684",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subtasks",
+								""
+							],
+							"query": [
+								{
+									"key": "task_id",
+									"value": "65b2e9a5fbd62c7c333a4684"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "695"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2b7-koDSY0ZKQ13cP4f+4YJGUEoAH+A\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 04:33:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"User subtasks retrieved successfully\",\n    \"data\": [\n        {\n            \"_id\": \"65b2ee52d595b5772ed55e2a\",\n            \"task_id\": \"65b2e9a5fbd62c7c333a4684\",\n            \"title\": \"sub-task\",\n            \"status\": 0,\n            \"deleted_at\": null,\n            \"createdAt\": \"2024-01-25T23:27:14.851Z\",\n            \"updatedAt\": \"2024-01-25T23:27:14.851Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65b3360617be3774f257f3f5\",\n            \"task_id\": \"65b2e9a5fbd62c7c333a4684\",\n            \"title\": \"sub-task-2\",\n            \"status\": 0,\n            \"deleted_at\": null,\n            \"createdAt\": \"2024-01-26T04:33:10.874Z\",\n            \"updatedAt\": \"2024-01-26T04:33:10.874Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65b3360a17be3774f257f3f8\",\n            \"task_id\": \"65b2e9a5fbd62c7c333a4684\",\n            \"title\": \"sub-task-3\",\n            \"status\": 0,\n            \"deleted_at\": null,\n            \"createdAt\": \"2024-01-26T04:33:14.876Z\",\n            \"updatedAt\": \"2024-01-26T04:33:14.876Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": "{{base_url}}/task/update/65b2e9a5fbd62c7c333a4684"
+			},
+			"response": [
+				{
+					"name": "Update Task",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"dueDate\": \"2024-12-31T20:31:00.000Z\",\r\n        \"status\": \"IN_PROGRESS\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/tasks/update/65b2e9a5fbd62c7c333a4684"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "325"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"145-jawXBhgtTZzwLSltK/saDUmyBkM\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 04:44:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Task updated successfully\",\n    \"data\": {\n        \"_id\": \"65b2e9a5fbd62c7c333a4684\",\n        \"title\": \"TASK\",\n        \"description\": \"DESCRIPTION OF TASK\",\n        \"dueDate\": \"2024-12-31T20:31:00.000Z\",\n        \"priority\": 340,\n        \"status\": \"IN_PROGRESS\",\n        \"deleted_at\": null,\n        \"createdAt\": \"2024-01-25T23:07:17.032Z\",\n        \"updatedAt\": \"2024-01-26T04:44:38.828Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Sub Task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"status\": 0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/subtasks/update/65b2e9a5fbd62c7c333a4684"
+			},
+			"response": [
+				{
+					"name": "Update Sub Task",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"status\": 1}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/subtasks/update/65b3365717be3774f257f3fe"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "285"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"11d-vbRLxxUJutBxdjbeFEtsdrYEJCE\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 05:04:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Subtask status updated successfully\",\n    \"data\": {\n        \"_id\": \"65b3365717be3774f257f3fe\",\n        \"task_id\": \"65b3363817be3774f257f3fb\",\n        \"title\": \"TASK-2 sub-task-1\",\n        \"status\": 1,\n        \"deleted_at\": null,\n        \"createdAt\": \"2024-01-26T04:34:31.951Z\",\n        \"updatedAt\": \"2024-01-26T05:04:22.489Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "delete a task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": "{{base_url}}/tasks/delete/65b2e9a5fbd62c7c333a4684"
+			},
+			"response": [
+				{
+					"name": "delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/tasks/delete/65b2e9a5fbd62c7c333a4684"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"41-UXTeaHDNnLKSfLxVU8qNqxZPyp8\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 04:50:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Task deleted successfully\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "delete subtask",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": "{{base_url}}/subtasks/delete/65b2e9a5fbd62c7c333a4684"
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/subtasks/delete/65b3365717be3774f257f3fe"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "68"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"44-EjJ8ETnYanKa4w16ww7n6H4SGfA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 Jan 2024 05:12:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Subtask deleted successfully\",\n    \"data\": null\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiJhazMyNjQxMTQiLCJpYXQiOjE1MTYyMzkwMjJ9.l4hXZHoqR8YdzFdGCVojmeMaPr-lfl62Hy1btsH8AxA",
+			"type": "string"
+		}
+	]
+}
